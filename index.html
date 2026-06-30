@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ASTRA — Post-Tornado Building Damage Recognition</title>
+<meta name="description" content="ASTRA: a large-scale framework for automated post-tornado building damage recognition under the IN-CORE engineering taxonomy." />
+
+<!-- ============================================================= -->
+<!--  EDIT EVERYTHING IN THE CONFIG BLOCK BELOW.                    -->
+<!--  You should not need to touch the HTML/CSS to update content. -->
+<!--  Search for "ADD A NEWS ITEM" to add updates.                 -->
+<!-- ============================================================= -->
+<script>
+const CONFIG = {
+  /* ---- Header / hero ---- */
+  shortName: "ASTRA",
+  title: "ASTRA: Architectural Insights for Post-Tornado Damage Recognition",
+  tagline: "A systematic evaluation of 79 deep learning models on the Quad-State Tornado Damage benchmark.",
+  /* Author names with superscript affiliation markers. */
+  authors: "Robinson Umeike<sup>1,2,*</sup>, Thang Dao<sup>1</sup>, Shane Crawford<sup>1</sup>, John van de Lindt<sup>3</sup>, Blythe Johnston<sup>3</sup>, Wanting (Lisa) Wang<sup>4</sup>, Trung Do<sup>5</sup>, Ajibola Mofikoya<sup>1</sup>, Sarbesh Banjara<sup>1</sup>, Cuong Pham<sup>5</sup>",
+  /* Concise affiliation key (matches the superscripts above). */
+  affiliation: "<sup>1</sup>University of Alabama, Civil, Construction &amp; Environmental Engineering · <sup>2</sup>University of Alabama, Computer Science · <sup>3</sup>Colorado State University · <sup>4</sup>Old Dominion University · <sup>5</sup>University of South Alabama. &nbsp;<sup>*</sup>Corresponding author.",
+
+  /* ---- Action buttons. status: "active" | "soon" | "disabled" ----
+     For "active", provide an href. For "soon"/"disabled", href is ignored.
+     To turn the Code button live later: set status:"active" and paste the URL. */
+  links: [
+    { label: "Paper",   href: "#",  status: "active" },   // <-- replace href with paper/PDF/arXiv URL
+    { label: "Code",    href: "https://github.com/crumeike/ASTRA", status: "soon" }, // flip to "active" when ready
+    { label: "Dataset", href: "#",  status: "soon" }      // availability TBD; flip to "active" + URL if/when cleared
+  ],
+
+  /* ---- Overview paragraph (plain text; replace freely) ---- */
+  overview: "Rapid, accurate building damage assessment after tornadoes is critical for emergency response and recovery, yet automated methods struggle with the visual complexity of tornado-induced wreckage, severe domain shift, and extreme class imbalance. ASTRA is a large-scale framework that evaluates 79 open-source models (67 CNNs and 12 Vision Transformers) across 38 hyperparameter variations in 2,420 controlled experiments on the expertly curated Quad-State Tornado Damage (QSTD) benchmark of 5,517 street-view images annotated under the IN-CORE engineering taxonomy. The study disentangles the roles of architecture, optimization, and pre-training source, and validates cross-event generalization on the held-out Tuscaloosa-Moore Tornado Damage (TMTD) dataset.",
+
+  /* ---- News / Updates ----
+     Most-recent-first is handled automatically (sorted by date).
+     Dates are ISO "YYYY-MM-DD". ===== ADD A NEWS ITEM ===== just copy a line: */
+  news: [
+    { date: "2026-06-29", body: "Project page is live. Code release coming soon." },
+    { date: "2026-06-15", body: "Manuscript submitted for peer review." },
+    // { date: "2026-07-01", body: "Your next update here." },
+  ],
+
+  /* ---- BibTeX (shown in the copyable Citation box) ---- */
+  bibtex: `@article{umeike2026astra,
+  title   = {ASTRA: Architectural Insights for Post-Tornado Damage Recognition},
+  author  = {Umeike, Robinson and Dao, Thang and Crawford, Shane and van de Lindt, John and others},
+  journal = {Under review},
+  year    = {2026}
+}`,
+
+  /* ---- Footer ---- */
+  contact: "Correspondence: your.email@institution.edu",
+  lastUpdated: "June 29, 2026"
+};
+</script>
+
+<style>
+  :root{
+    --ink:#1b2733; --muted:#5c6b7a; --bg:#ffffff; --bg-alt:#f6f8fa;
+    --line:#e6eaef; --accent:#2f5d8a; --accent-dark:#244a70; --accent-ink:#ffffff;
+    --maxw:760px;
+    /* Damage-severity scale (DS0 undamaged -> DS5 debris/non-structural) */
+    --ds0:#2e7d5b; --ds1:#6aa84f; --ds2:#c9a227; --ds3:#d98324; --ds4:#c44536; --ds5:#6b7280;
+    --serif:"Iowan Old Style",Georgia,"Palatino Linotype","Times New Roman",serif;
+    --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --mono:ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto;} *{transition:none!important;} }
+  body{
+    margin:0; color:var(--ink); background:var(--bg);
+    font-family:var(--sans); font-size:17px; line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--accent);}
+  a:hover{color:var(--accent-dark);}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 24px;}
+
+  /* slim top nav */
+  .topbar{
+    position:sticky; top:0; z-index:10; background:rgba(255,255,255,.92);
+    backdrop-filter:saturate(150%) blur(6px); border-bottom:1px solid var(--line);
+  }
+  .topbar .row{display:flex; align-items:center; justify-content:space-between; height:52px;}
+  .topbar .brand{font-family:var(--serif); font-weight:600; letter-spacing:.02em;}
+  .topbar nav a{margin-left:20px; color:var(--muted); text-decoration:none; font-size:14px;}
+  .topbar nav a:hover{color:var(--ink);}
+  @media (max-width:520px){ .topbar nav a{margin-left:14px;} .topbar nav a:first-child{margin-left:0;} }
+
+  /* hero */
+  header.hero{padding:64px 0 0;}
+  h1{
+    font-family:var(--serif); font-weight:600; line-height:1.18;
+    font-size:clamp(30px,4.6vw,44px); margin:0 0 14px; letter-spacing:-.01em;
+  }
+  .tagline{font-size:18px; color:var(--muted); margin:0 0 26px;}
+  .authors{font-size:16px; margin:0 0 4px;}
+  .affil{font-size:15px; color:var(--muted); margin:0 0 26px; font-style:italic;}
+
+  /* buttons */
+  .actions{display:flex; flex-wrap:wrap; gap:12px; margin-bottom:42px;}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px; text-decoration:none;
+    font-size:15px; font-weight:500; padding:10px 18px; border-radius:8px;
+    border:1px solid var(--accent); color:var(--accent-ink); background:var(--accent);
+    transition:background .15s ease, border-color .15s ease;
+  }
+  .btn:hover{background:var(--accent-dark); border-color:var(--accent-dark); color:var(--accent-ink);}
+  .btn:focus-visible{outline:3px solid #9dc1e8; outline-offset:2px;}
+  .btn--ghost{background:#fff; color:var(--accent);}
+  .btn--ghost:hover{background:var(--bg-alt); color:var(--accent-dark);}
+  .btn--soon{
+    background:var(--bg-alt); color:var(--muted); border-color:var(--line);
+    cursor:not-allowed;
+  }
+  .btn--soon:hover{background:var(--bg-alt); color:var(--muted);}
+  .pill{
+    font-size:11px; font-weight:600; letter-spacing:.04em; text-transform:uppercase;
+    padding:2px 7px; border-radius:999px; background:#e7ecf2; color:var(--muted);
+  }
+
+  /* severity strip (signature element) */
+  .severity{display:flex; height:8px; width:100%; border-radius:4px; overflow:hidden;}
+  .severity span{flex:1;}
+  .severity span:nth-child(1){background:var(--ds0);}
+  .severity span:nth-child(2){background:var(--ds1);}
+  .severity span:nth-child(3){background:var(--ds2);}
+  .severity span:nth-child(4){background:var(--ds3);}
+  .severity span:nth-child(5){background:var(--ds4);}
+  .severity span:nth-child(6){background:var(--ds5);}
+  .severity-legend{
+    display:flex; justify-content:space-between; gap:6px; margin-top:8px;
+    font-size:11px; color:var(--muted); letter-spacing:.02em; flex-wrap:wrap;
+  }
+  .severity-legend span{flex:1; text-align:center; min-width:46px;}
+
+  /* sections */
+  section{padding:46px 0; border-top:1px solid var(--line);}
+  section:first-of-type{border-top:none;}
+  h2{
+    font-family:var(--serif); font-weight:600; font-size:24px; margin:0 0 6px;
+    display:flex; align-items:baseline; gap:12px;
+  }
+  h2 .mark{
+    width:30px; height:3px; border-radius:2px; flex:none;
+    background:linear-gradient(90deg,var(--ds0),var(--ds2),var(--ds4));
+    transform:translateY(-4px);
+  }
+  .lead{color:var(--ink);}
+
+  /* news */
+  ul.news{list-style:none; margin:14px 0 0; padding:0;}
+  ul.news li{display:flex; gap:18px; padding:14px 0; border-bottom:1px solid var(--line);}
+  ul.news li:last-child{border-bottom:none;}
+  ul.news time{
+    flex:none; width:104px; color:var(--accent); font-family:var(--mono);
+    font-size:13px; padding-top:2px;
+  }
+  ul.news .body{color:var(--ink);}
+  @media (max-width:520px){
+    ul.news li{flex-direction:column; gap:2px;}
+    ul.news time{width:auto;}
+  }
+
+  /* citation */
+  .cite-wrap{position:relative; margin-top:14px;}
+  pre.bib{
+    margin:0; background:var(--bg-alt); border:1px solid var(--line); border-radius:10px;
+    padding:18px 18px; overflow:auto; font-family:var(--mono); font-size:13.5px;
+    line-height:1.55; color:#243; white-space:pre;
+  }
+  .copy-btn{
+    position:absolute; top:10px; right:10px;
+    font-family:var(--sans); font-size:13px; font-weight:500;
+    padding:6px 12px; border-radius:7px; border:1px solid var(--line);
+    background:#fff; color:var(--accent); cursor:pointer; transition:all .15s ease;
+  }
+  .copy-btn:hover{background:var(--accent); color:#fff; border-color:var(--accent);}
+  .copy-btn:focus-visible{outline:3px solid #9dc1e8; outline-offset:2px;}
+  .copy-btn.copied{background:var(--ds0); color:#fff; border-color:var(--ds0);}
+
+  /* footer */
+  footer{border-top:1px solid var(--line); padding:30px 0 60px; color:var(--muted); font-size:14px;}
+  footer .severity{margin-bottom:22px;}
+</style>
+</head>
+<body>
+
+  <!-- Slim sticky nav -->
+  <div class="topbar">
+    <div class="wrap row">
+      <span class="brand" id="nav-brand">ASTRA</span>
+      <nav aria-label="Section navigation">
+        <a href="#overview">Overview</a>
+        <a href="#updates">Updates</a>
+        <a href="#citation">Cite</a>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <header class="hero">
+    <div class="wrap">
+      <h1 id="title"></h1>
+      <p class="tagline" id="tagline"></p>
+      <p class="authors" id="authors"></p>
+      <p class="affil" id="affil"></p>
+      <div class="actions" id="actions"></div>
+    </div>
+    <div class="wrap" aria-hidden="true">
+      <div class="severity">
+        <span></span><span></span><span></span><span></span><span></span><span></span>
+      </div>
+      <div class="severity-legend">
+        <span>DS0 None</span><span>DS1 Slight</span><span>DS2 Moderate</span>
+        <span>DS3 Extensive</span><span>DS4 Complete</span><span>DS5 Debris</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <!-- Overview -->
+    <section id="overview" aria-labelledby="overview-h">
+      <h2 id="overview-h"><span class="mark" aria-hidden="true"></span>Overview</h2>
+      <p class="lead" id="overview-text"></p>
+    </section>
+
+    <!-- News -->
+    <section id="updates" aria-labelledby="updates-h">
+      <h2 id="updates-h"><span class="mark" aria-hidden="true"></span>News &amp; Updates</h2>
+      <ul class="news" id="news-list"></ul>
+    </section>
+
+    <!-- Citation -->
+    <section id="citation" aria-labelledby="citation-h">
+      <h2 id="citation-h"><span class="mark" aria-hidden="true"></span>Citation</h2>
+      <p>If you find this work useful, please cite:</p>
+      <div class="cite-wrap">
+        <button class="copy-btn" id="copy-btn" type="button" aria-label="Copy BibTeX to clipboard">Copy</button>
+        <pre class="bib" id="bibtex" tabindex="0"></pre>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="wrap">
+      <div class="severity" aria-hidden="true">
+        <span></span><span></span><span></span><span></span><span></span><span></span>
+      </div>
+      <p id="contact"></p>
+      <p id="updated"></p>
+    </div>
+  </footer>
+
+<script>
+  /* ---------- Render from CONFIG (no edits needed below) ---------- */
+  const $ = (id) => document.getElementById(id);
+
+  $("nav-brand").textContent = CONFIG.shortName;
+  document.title = CONFIG.shortName + " — Post-Tornado Building Damage Recognition";
+  $("title").textContent = CONFIG.title;
+  $("tagline").textContent = CONFIG.tagline;
+  $("authors").innerHTML = CONFIG.authors;
+  $("affil").innerHTML = CONFIG.affiliation;
+  $("overview-text").textContent = CONFIG.overview;
+  $("bibtex").textContent = CONFIG.bibtex;
+  $("contact").textContent = CONFIG.contact;
+  $("updated").textContent = "Last updated: " + CONFIG.lastUpdated;
+
+  /* Buttons */
+  const actions = $("actions");
+  CONFIG.links.forEach((lnk, i) => {
+    const primary = i === 0;
+    if (lnk.status === "active") {
+      const a = document.createElement("a");
+      a.className = "btn" + (primary ? "" : " btn--ghost");
+      a.href = lnk.href;
+      a.textContent = lnk.label;
+      if (/^https?:/.test(lnk.href)) { a.target = "_blank"; a.rel = "noopener"; }
+      actions.appendChild(a);
+    } else {
+      const span = document.createElement("span");
+      span.className = "btn btn--soon";
+      span.setAttribute("aria-disabled", "true");
+      span.innerHTML = lnk.label + ' <span class="pill">' +
+        (lnk.status === "soon" ? "Soon" : "N/A") + "</span>";
+      actions.appendChild(span);
+    }
+  });
+
+  /* News — sorted most-recent-first */
+  const list = $("news-list");
+  const fmt = (iso) => {
+    const d = new Date(iso + "T00:00:00");
+    return isNaN(d) ? iso :
+      d.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" });
+  };
+  [...CONFIG.news].sort((a, b) => b.date.localeCompare(a.date)).forEach(item => {
+    const li = document.createElement("li");
+    const t = document.createElement("time");
+    t.dateTime = item.date; t.textContent = fmt(item.date);
+    const b = document.createElement("div");
+    b.className = "body"; b.textContent = item.body;
+    li.append(t, b); list.appendChild(li);
+  });
+
+  /* Copy BibTeX */
+  const copyBtn = $("copy-btn");
+  copyBtn.addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(CONFIG.bibtex);
+    } catch (e) {
+      const r = document.createRange(); r.selectNode($("bibtex"));
+      const sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r);
+      try { document.execCommand("copy"); } catch (_) {} sel.removeAllRanges();
+    }
+    copyBtn.textContent = "Copied"; copyBtn.classList.add("copied");
+    setTimeout(() => { copyBtn.textContent = "Copy"; copyBtn.classList.remove("copied"); }, 1800);
+  });
+</script>
+</body>
+</html>
